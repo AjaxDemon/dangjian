@@ -1,0 +1,32 @@
+create table user
+(
+	id  bigint not null auto_increment
+		primary key,
+  phone varchar(30) not null DEFAULT '' COMMENT '手机号',
+	nick_name varchar(50) null COMMENT '昵称',
+	password varchar(50) not null DEFAULT 'e10adc3949ba59abbe56e057f20f883e' COMMENT '123456的32位MD5',
+  create_time timestamp  NULL DEFAULT CURRENT_TIMESTAMP,
+  update_time timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  type int(3) COMMENT '0:管理员 1:普通用户'
+)
+comment '党建用户表'
+;
+
+create table question(
+  id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  title VARCHAR(255) COMMENT '题目',
+  choice VARCHAR(800) COMMENT '选项以#&隔开',
+  answer VARCHAR(20) COMMENT '答案，以逗号隔开',
+  type tinyint(3) COMMENT '0:单选，1：多选，2：判断',
+  analysis VARCHAR(500) COMMENT '解析',
+  create_time timestamp  NULL DEFAULT CURRENT_TIMESTAMP,
+  update_time timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+)COMMENT '题目表';
+
+create table wrongbook(
+  id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  uid bigint not null COMMENT '用户id',
+  qid bigint not null COMMENT '题目表的id',
+  type tinyint(1) COMMENT '0:正常，1:删除'
+)COMMENT '错题本'
